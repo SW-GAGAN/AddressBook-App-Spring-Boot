@@ -1,0 +1,18 @@
+package com.example.addressbookapp.service;
+
+import com.example.addressbookapp.model.Contact;
+
+import java.util.List;
+
+public interface AddressBookService {
+    public List<Contact> getContacts();
+
+    public Contact getContacts(long contactId);
+
+    public Contact addContact(Contact contact);
+
+    public Contact updateContact(Contact contact);
+
+}
+
+
