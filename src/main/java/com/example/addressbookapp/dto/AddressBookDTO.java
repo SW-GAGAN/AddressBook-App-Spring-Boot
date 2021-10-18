@@ -1,19 +1,21 @@
-package com.example.addressbookapp.model;
+package com.example.addressbookapp.dto;
 
-public class AddressBookDO {
+public class AddressBookDTO {
     private int id;
     private String name;
     private String address;
     private String city;
-    private String phone_number;
+    private String state;
+    private String phoneNumber;
     private int zip;
 
-    public AddressBookDO(int id, String name, String address, String city, String phone_number, int zip) {
+    public AddressBookDTO(int id, String name, String address, String city, String state, String phoneNumber, int zip) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
-        this.phone_number = phone_number;
+        this.state = state;
+        this.phoneNumber = phoneNumber;
         this.zip = zip;
     }
 
@@ -49,12 +51,20 @@ public class AddressBookDO {
         this.city = city;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getState() {
+        return state;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getZip() {
@@ -63,17 +73,5 @@ public class AddressBookDO {
 
     public void setZip(int zip) {
         this.zip = zip;
-    }
-
-    @Override
-    public String toString() {
-        return "AddressBookDO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", phone_number='" + phone_number + '\'' +
-                ", zip=" + zip +
-                '}';
     }
 }

@@ -1,18 +1,29 @@
 package com.example.addressbookapp.service;
 
+import com.example.addressbookapp.dto.AddressBookDTO;
 import com.example.addressbookapp.model.Contact;
 
 import java.util.List;
 
 public interface AddressBookService {
-    public List<Contact> getContacts();
 
-    public Contact getContacts(long contactId);
+    List<AddressBookDTO> getAddressBook();
 
-    public Contact addContact(Contact contact);
+    AddressBookDTO addAddressBook(AddressBookDTO addressBookDTO);
 
-    public Contact updateContact(Contact contact);
+    AddressBookDTO updateAddressBook(int id, AddressBookDTO addressBookDTO);
 
+    List<Contact> getContacts();
+
+    Contact getContacts(long contactId);
+
+    Contact addContact(Contact contact);
+
+    Contact addAddressBook(Contact contact);
+
+    Contact updateContact(Contact contact);
 }
+
+
 
 

@@ -1,8 +1,12 @@
 package com.example.addressbookapp.controller;
 
+import com.example.addressbookapp.dto.AddressBookDTO;
 import com.example.addressbookapp.model.Contact;
 import com.example.addressbookapp.service.AddressBookService;
+import com.example.addressbookapp.service.IAddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,56 +15,21 @@ import java.util.List;
 public class AddressBookController {
 
     @Autowired
-    private AddressBookService addressBookService;
+    private IAddressBookService iAddressBookService;
 
-    @GetMapping("/home")
-    public String home() {
-        return "Welcome to AddressBook Application";
+
+    @GetMapping(value = "/addresses")
+    public ResponseEntity<List<AddressBookDTO>> getAddresses() {
+        return new ResponseEntity<>(iAddressBookService.getAddressBook(), HttpStatus.OK);
     }
 
-    /**
-     * Get the Contacts added in the List
-     *
-     * @return Contacts
-     */
-    @GetMapping("/contacts")
-    public List<Contact> getContacts() {
-        return this.addressBookService.getContacts();
+    @PostMapping(value = "/address")
+    public ResponseEntity<AddressBookDTO> addAddressBook(@RequestBody AddressBookDTO addressBookDTO) {
+        return new ResponseEntity<>(iAddressBookService.addAddressBook(addressBookDTO), HttpStatus.CREATED);
     }
 
-    /**
-     * Get particular contact using ContactId
-     *
-     * @param contactId
-     * @return Contacts
-     */
-    @GetMapping("/contacts/{contactId}")
-    public Contact getContacts(@PathVariable long contactId) {
-        return this.addressBookService.getContacts(contactId);
-
+    @PutMapping(value = "/address")
+    public ResponseEntity<AddressBookDTO> updateAddressBook(@RequestParam(name = "id") final int id, @RequestBody AddressBookDTO addressBookDTO) {
+        return new ResponseEntity<>(iAddressBookService.updateAddressBook(id, addressBookDTO), HttpStatus.OK);
     }
-
-    /**
-     * Add the contacts in to the Contact list
-     *
-     * @param contact
-     * @return
-     */
-    @PostMapping(path = "/contacts", consumes = "application/json")
-    public Contact addContact(@RequestBody Contact contact) {
-        return this.addressBookService.addContact(contact);
-    }
-
-    /**
-     * Update the Contacts using Post Request
-     *
-     * @param contact
-     * @return
-     */
-    @PutMapping("/update")
-    public Contact updateContact(@RequestBody Contact contact) {
-        return this.addressBookService.updateContact(contact);
-    }
-
 }
-
